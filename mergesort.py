@@ -37,6 +37,6 @@ def merge(A, low, mid, high):
             
 #Test
 if __name__ == "__main__":
-    A = [5, 2, 4, 6, 1, 3]
+    A = [-1, 5, 20, 8, 300, 2]
 merge_sort(A, 0, len(A) - 1)
 print(A)  # should be sorted
