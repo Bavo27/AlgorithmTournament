@@ -77,9 +77,21 @@ def merge(A, low, mid, high):
 A = list(range(1,101))
 random.shuffle(A)
 
+def bavoSort(arr):
+    for i in range(len(arr)):
+        for j in range(i - 1, -1, -1):
+            curr = arr[j]
+            if arr[j] > arr[j+1]:
+                arr[j] = arr[j+1]
+                arr[j+1] = curr
+                arrays.append(arr.copy())
+    #return arr
+
 
 
 merge_sort(A, 0, len(A) - 1)
+
+#bavoSort(A)
 
 i = -1
 def animate():
@@ -88,7 +100,7 @@ def animate():
     array = arrays[i]
     visualize(array)
 
-    root.after(20, animate)
+    root.after(3, animate)
 
 animate()
 root.mainloop()
