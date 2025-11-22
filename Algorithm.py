@@ -88,7 +88,7 @@ class Algorithm:
                 arr[k] = R[j]
                 j += 1
                 k += 1
-        return arr
+        self.array.append(arr.copy())
     
     def bavoSort(self, arr):
         for i in range(len(arr)):
@@ -97,7 +97,7 @@ class Algorithm:
                 if arr[j] > arr[j+1]:
                     arr[j] = arr[j+1]
                     arr[j+1] = curr
-        return arr
+        self.array.append(arr.copy())
     
     def insertionSort(self, arr):
         for i in range(1, len(arr)):
@@ -107,7 +107,7 @@ class Algorithm:
                 arr[j + 1] = arr[j]
                 j -= 1
             arr[j + 1] = key
-        return arr
+        self.array.append(arr.copy())
 
 if __name__ == "__main__":
     Algorithm()
