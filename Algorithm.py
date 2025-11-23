@@ -3,53 +3,48 @@ import tkinter as tk
 import time
 
 
-
 class Algorithm:
     def __init__(self):
-        arr = list(range(20, 31))
+        arr = list(range(10, 31))
         self.array = []
         random.shuffle(arr)
+
+        self.root = tk.Tk()
+        self.root.title("Algo Tournament")
+
+        self.w = 700
+        self.h = 500
+
+        self.canvas = tk.Canvas(self.root, width=self.w, height=self.h, bg="white")
+        self.canvas.pack()
+
         self.bubbleSort(arr)
         self.i = 0
-        self.visualizeSort(self.array)
-        
-    
-    def visualizeSort(self, arr):
-        root = tk.Tk()
-        root.title("Lorenzo")
-
-        w = 500
-        h = 500
-
-        canvas = tk.Canvas(root, width=w, height=h, bg="white")
-        canvas.pack()
-
-
-        xoffset = 25
-        yoffset = h - 100
-        barwidth = 4
-        barheight = 3
-
-        # arrays = []
-
-        def visualize(array):
-            canvas.delete("all")
-            for i, num in enumerate(array):
-                canvas.create_rectangle((barwidth*i)+xoffset,
-                                            yoffset-(barheight*(num)),
-                                            (barwidth*(i+1))+xoffset,
-                                            yoffset,
-                                            fill="black", outline="black")
-                
+        self.visualizeSort(self.array, 50)
+         
+    def visualizeSort(self, arr, x):
         def animate():
-            visualize(arr[self.i])
+            self.visualize(arr[self.i], x)
 
-            root.after(10, animate)
-            self.i += 1
+            self.root.after(10, animate)
+            if self.i < len(arr) - 1:
+                self.i += 1
 
         animate()
-        root.mainloop()
+        self.root.mainloop()
 
+    def visualize(self, array, x):
+        xoffset = x
+        yoffset = self.h - 100
+        barwidth = 4
+        barheight = 3
+        self.canvas.delete("all")
+        for i, num in enumerate(array):
+            self.canvas.create_rectangle((barwidth*i)+xoffset,
+                                        yoffset-(barheight*(num)),
+                                        (barwidth*(i+1))+xoffset,
+                                        yoffset,
+                                        fill="black", outline="black")
     
     def bubbleSort(self, arr):
         n = len(arr)
