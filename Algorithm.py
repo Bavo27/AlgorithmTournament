@@ -5,9 +5,12 @@ import time
 
 class Algorithm:
     def __init__(self):
-        arr = list(range(10, 31))
-        self.array = []
-        random.shuffle(arr)
+        arr1 = list(range(10, 31))
+        arr2 = list(range(10, 31))
+        self.array1 = []
+        self.array2 = []
+        random.shuffle(arr1)
+        random.shuffle(arr2)
 
         self.root = tk.Tk()
         self.root.title("Algo Tournament")
@@ -18,9 +21,10 @@ class Algorithm:
         self.canvas = tk.Canvas(self.root, width=self.w, height=self.h, bg="white")
         self.canvas.pack()
 
-        self.bubbleSort(arr)
+        self.bubbleSort(arr1)
         self.i = 0
-        self.visualizeSort(self.array, 50)
+        self.j = 0
+        self.visualizeSort(self.array1, 50)
          
     def visualizeSort(self, arr, x):
         def animate():
@@ -52,7 +56,7 @@ class Algorithm:
             for j in range(0, n-i-1):
                 if arr[j] > arr[j+1]:
                     arr[j], arr[j+1] = arr[j+1], arr[j]
-                    self.array.append(arr.copy())
+                    self.array1.append(arr.copy())
     
     def mergeSort(self, arr):
         if len(arr) > 1:
@@ -92,7 +96,7 @@ class Algorithm:
                 if arr[j] > arr[j+1]:
                     arr[j] = arr[j+1]
                     arr[j+1] = curr
-        self.array.append(arr.copy())
+        print("completed")
     
     def insertionSort(self, arr):
         for i in range(1, len(arr)):
@@ -104,5 +108,14 @@ class Algorithm:
             arr[j + 1] = key
         self.array.append(arr.copy())
 
-if __name__ == "__main__":
-    Algorithm()
+    def selectionSort(self, arr):
+        for i in range(len(arr)):
+            min_idx = i
+            for j in range(i+1, len(arr)):
+                if arr[j] < arr[min_idx]:
+                    min_idx = j
+            arr[i], arr[min_idx] = arr[min_idx], arr[i]
+            self.array.append(arr.copy())
+
+
+Algorithm()
