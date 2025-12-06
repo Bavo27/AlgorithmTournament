@@ -4,8 +4,6 @@ from tkinter import ttk
 import Algorithm
 
 class MainApp:
-
-    
     
     def __init__(self):
 
@@ -26,9 +24,10 @@ class MainApp:
         self.b2 = tk.Button(self.menu, text="Insertion", command=lambda: self.selected(self.b2, "insertion"))
         self.b3 = tk.Button(self.menu, text="Bubble", command=lambda: self.selected(self.b3, "bubble"))
         self.b4 = tk.Button(self.menu, text="Bavo", command=lambda: self.selected(self.b4, "bavo"))
+        self.b5 = tk.Button(self.menu, text="Merge", command=lambda: self.selected(self.b5, "merge"))
         
 
-        for bttn in (self.b1, self.b2, self.b3, self.b4):
+        for bttn in (self.b1, self.b2, self.b3, self.b4, self.b5):
             bttn.pack(pady=10)
             bttn.config(highlightbackground="SystemButtonFace")
 

@@ -18,6 +18,8 @@ class Algorithm:
                 return self.insertionSort(arr)
             case "selection":
                 return self.selectionSort(arr)
+            case "merge":
+                return self.mergeSort(arr)
     
     def bubbleSort(self, arr):
         n = len(arr)
@@ -59,39 +61,41 @@ class Algorithm:
             self.arraySteps.append(arr.copy())
         return self.arraySteps
     
+    def mergeSort(self, arr):
+        if len(arr) > 1:
+            mid = len(arr) // 2
+            
+            L = arr[:mid]
+            R = arr[mid:]
 
+            self.mergeSort(L)
+            self.mergeSort(R)
 
-# def mergeSort(self, arr):
-    #     if len(arr) > 1:
-    #         mid = len(arr) // 2
-    #         L = arr[:mid]
-    #         R = arr[mid:]
+            i = j = k = 0
 
-    #         self.mergeSort(L)
-    #         self.mergeSort(R)
+            while i < len(L) and j < len(R):
+                if L[i] < R[j]:
+                    arr[k] = L[i]
+                    i += 1
+                else:
+                    arr[k] = R[j]
+                    j += 1
+                k += 1
+                
+            while i < len(L):
+                arr[k] = L[i]
+                i += 1
+                k += 1
 
-    #         i = j = k = 0
+            while j < len(R):
+                arr[k] = R[j]
+                j += 1
+                k += 1
+            
+            self.arraySteps.append(arr.copy())
+        return self.arraySteps
 
-    #         while i < len(L) and j < len(R):
-    #             if L[i] < R[j]:
-    #                 arr[k] = L[i]
-    #                 i += 1
-    #             else:
-    #                 arr[k] = R[j]
-    #                 j += 1
-    #             k += 1
-
-    #         while i < len(L):
-    #             arr[k] = L[i]
-    #             i += 1
-    #             k += 1
-
-    #         while j < len(R):
-    #             arr[k] = R[j]
-    #             j += 1
-    #             k += 1
-
-    #     self.array.append(arr.copy())
+    
 
 
 
