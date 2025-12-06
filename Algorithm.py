@@ -56,7 +56,8 @@ class Algorithm:
                 if arr[j] > arr[j+1]:
                     arr[j] = arr[j+1]
                     arr[j+1] = curr
-        print("completed")
+                    self.arraySteps.append(arr.copy())
+        return self.arraySteps
     
     def insertionSort(self, arr):
         for i in range(1, len(arr)):
