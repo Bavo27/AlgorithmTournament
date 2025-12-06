@@ -6,8 +6,19 @@ import main
 class Algorithm:
     def __init__(self):
         self.arraySteps = [[]]  # to store steps for visualization
-    
 
+    def run(self, arr, algorithm):
+        self.arraySteps = [[]]
+        match algorithm:
+            case "bubble":
+                return self.bubbleSort(arr)
+            case "bavo":
+                return self.bavoSort(arr)
+            case "insertion":
+                return self.insertionSort(arr)
+            case "selection":
+                return self.selectionSort(arr)
+    
     def bubbleSort(self, arr):
         n = len(arr)
         for i in range(n):
@@ -16,40 +27,7 @@ class Algorithm:
                     arr[j], arr[j+1] = arr[j+1], arr[j]
                     self.arraySteps.append(arr.copy())
         return self.arraySteps # return the steps for visualization
-        
-    
-    def mergeSort(self, arr):
-        if len(arr) > 1:
-            mid = len(arr) // 2
-            L = arr[:mid]
-            R = arr[mid:]
 
-            self.mergeSort(L)
-            self.mergeSort(R)
-
-            i = j = k = 0
-
-            while i < len(L) and j < len(R):
-                if L[i] < R[j]:
-                    arr[k] = L[i]
-                    i += 1
-                else:
-                    arr[k] = R[j]
-                    j += 1
-                k += 1
-
-            while i < len(L):
-                arr[k] = L[i]
-                i += 1
-                k += 1
-
-            while j < len(R):
-                arr[k] = R[j]
-                j += 1
-                k += 1
-
-        self.array.append(arr.copy())
-    
     def bavoSort(self, arr):
         for i in range(len(arr)):
             for j in range(i - 1, -1, -1):
@@ -78,7 +56,43 @@ class Algorithm:
                 if arr[j] < arr[min_idx]:
                     min_idx = j
             arr[i], arr[min_idx] = arr[min_idx], arr[i]
-            self.array.append(arr.copy())
+            self.arraySteps.append(arr.copy())
+        return self.arraySteps
+    
+
+
+# def mergeSort(self, arr):
+    #     if len(arr) > 1:
+    #         mid = len(arr) // 2
+    #         L = arr[:mid]
+    #         R = arr[mid:]
+
+    #         self.mergeSort(L)
+    #         self.mergeSort(R)
+
+    #         i = j = k = 0
+
+    #         while i < len(L) and j < len(R):
+    #             if L[i] < R[j]:
+    #                 arr[k] = L[i]
+    #                 i += 1
+    #             else:
+    #                 arr[k] = R[j]
+    #                 j += 1
+    #             k += 1
+
+    #         while i < len(L):
+    #             arr[k] = L[i]
+    #             i += 1
+    #             k += 1
+
+    #         while j < len(R):
+    #             arr[k] = R[j]
+    #             j += 1
+    #             k += 1
+
+    #     self.array.append(arr.copy())
+
 
 
 Algorithm()
