@@ -2,6 +2,7 @@ import random
 import tkinter as tk
 from tkinter import ttk
 import Algorithm
+import time
 
 class MainApp:
     
@@ -9,7 +10,7 @@ class MainApp:
 
         self.root = tk.Tk()
         self.root.title("Algorithm Tournament")
-        self.root.geometry("500x700")
+        self.root.geometry("900x700")
 
         #-----MAIN MENU-------
         self.menu = tk.Frame(self.root)
@@ -47,7 +48,14 @@ class MainApp:
 
 
         self.menu.pack(fill="both", expand=True)
+
+        self.time1 = 0
+        self.time2 = 0
+        
         self.root.mainloop()
+        # self.canvas.create_text(100, 50, text="Algorithm 1 time: " + "{:.3f}".format(self.time1*1000), font=("Arial", 11), tag="alg1")
+        # self.canvas.create_text(550, 50, text="Algorithm 2 time: " + "{:.3f}".format(self.time2*1000), font=("Arial", 11), tag="alg1")
+
 
     def selected(self, bttn, alg):
         if(bttn in self.selectedBttns):
@@ -77,18 +85,27 @@ class MainApp:
 
         self.arr1 = list(range(1, 41))
         random.shuffle(self.arr1)
-        self.arr2 = list(range(1, 41))
-        random.shuffle(self.arr2)
+
+        arrayText = "["+ str(self.arr1[0])
+        
+        for i in range(1, len(self.arr1)):
+            arrayText += ", " + str(self.arr1[i])
+        arrayText += "]"
+
+        tk.Label(self.tournament, text="Array to sort: " + arrayText, font=("Arial", 10)).pack()
+
         self.arraySteps1 = [[]]
         self.arraySteps2 = [[]]
 
         self.i = 0
 
-        algo = Algorithm.Algorithm()
-        self.arraySteps1 = algo.run(self.arr1, self.selectedAlgs[0])
-        self.arraySteps2 = algo.run(self.arr2, self.selectedAlgs[1])
-
-        self.visualizeSort(50)
+        sort1 = Algorithm.Algorithm()
+        self.arraySteps1 = sort1.run(self.arr1.copy(), self.selectedAlgs[0])
+        sort2 = Algorithm.Algorithm() #so that the sort counter and timer doesn't cross
+        self.arraySteps2 = sort2.run(self.arr1.copy(), self.selectedAlgs[1])
+        self.time1 = sort1.getTimeCounter()
+        self.time2 = sort2.getTimeCounter()
+        self.visualizeSort(20)
         
 
     def visualizeSort(self, x):
@@ -97,15 +114,16 @@ class MainApp:
             if(self.i < len(self.arraySteps1)):
                 self.visualize1(self.arraySteps1[self.i], x)
             if(self.i < len(self.arraySteps2)):
-                self.visualize2(self.arraySteps2[self.i], x+200)
+                self.visualize2(self.arraySteps2[self.i], x+450)
             if self.i < maxLen:
-                self.root.after(15, animate)
+                self.root.after(1, animate)
                 self.i += 1
 
         animate()
         #self.root.mainloop()
     
     def visualize1(self, array, x):
+        startTime = time.time()
         xoffset = x
         yoffset = self.h - 100
         barwidth = 4
@@ -117,8 +135,13 @@ class MainApp:
                                         (barwidth*(i+1))+xoffset,
                                         yoffset,
                                         fill="black", outline="black", tag="alg1")
+        endTime = time.time()
+        self.time1 += endTime - startTime
+        self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1")
+        self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(len(self.arraySteps1)), font=("Arial", 11), tag="alg1")
             
     def visualize2(self, array, x):
+        startTime = time.time()
         xoffset = x
         yoffset = self.h - 100
         barwidth = 4
@@ -130,6 +153,10 @@ class MainApp:
                                         (barwidth*(i+1))+xoffset,
                                         yoffset,
                                         fill="black", outline="black", tag="alg2")
+        endTime = time.time()
+        self.time1 += endTime - startTime
+        self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1")
+        self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(len(self.arraySteps2)), font=("Arial", 11), tag="alg2")
 
 if __name__ == "__main__":
     MainApp()
