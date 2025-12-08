@@ -114,13 +114,12 @@ class Algorithm:
             self.arraySteps.append(arr.copy())
         return self.arraySteps
     
-<<<<<<< Updated upstream
     def getStepCounter(self):
         return self.stepCounter
 
     def getTimeCounter(self):
         return self.timeCounter
-=======
+
     def heapify(arr, n, i):
         largest = i
         l = 2 * i + 1
@@ -146,12 +145,5 @@ class Algorithm:
            arr[i], arr[0] = arr[0], arr[i]
            heapify(arr, i, 0) 
            
-
-    arr = [12, 11, 13, 5, 6, 7]
-heapSort(arr)
-print("Sorted array is:", arr)
->>>>>>> Stashed changes
-
-
 
 Algorithm()
