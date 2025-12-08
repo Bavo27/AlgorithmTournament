@@ -54,8 +54,6 @@ class MainApp:
         self.time2 = 0
         
         self.root.mainloop()
-        # self.canvas.create_text(100, 50, text="Algorithm 1 time: " + "{:.3f}".format(self.time1*1000), font=("Arial", 11), tag="alg1")
-        # self.canvas.create_text(550, 50, text="Algorithm 2 time: " + "{:.3f}".format(self.time2*1000), font=("Arial", 11), tag="alg1")
 
 
     def selected(self, bttn, alg):
@@ -99,6 +97,8 @@ class MainApp:
         self.arraySteps2 = [[]]
 
         self.i = 0
+        self.alg1Steps = 0
+        self.alg2Steps = 0
 
         sort1 = Algorithm.Algorithm()
         self.arraySteps1 = sort1.run(self.arr1.copy(), self.selectedAlgs[0])
@@ -121,7 +121,6 @@ class MainApp:
                 self.i += 1
 
         animate()
-        #self.root.mainloop()
     
     def visualize1(self, array, x):
         startTime = time.time()
@@ -138,8 +137,9 @@ class MainApp:
                                         fill="black", outline="black", tag="alg1")
         endTime = time.time()
         self.time1 += endTime - startTime
-        self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1")
-        self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(len(self.arraySteps1)), font=("Arial", 11), tag="alg1")
+        self.alg1Steps += 1
+        self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1", fill="black")
+        self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(self.alg1Steps), font=("Arial", 11), tag="alg1", fill="black")
             
     def visualize2(self, array, x):
         startTime = time.time()
@@ -155,9 +155,11 @@ class MainApp:
                                         yoffset,
                                         fill="black", outline="black", tag="alg2")
         endTime = time.time()
-        self.time1 += endTime - startTime
-        self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg2")
-        self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(len(self.arraySteps2)), font=("Arial", 11), tag="alg2")
+        self.time2 = self.time2 + (endTime - startTime)*10
+        self.time2 = round(self.time2)
+        self.alg2Steps += 1
+        self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time2), font=("Arial", 11), tag="alg2", fill="black")
+        self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
 
 if __name__ == "__main__":
     MainApp()
