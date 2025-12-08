@@ -1,7 +1,7 @@
 import random
 import tkinter as tk
 import time
-import main
+
 
 class Algorithm:
     def __init__(self):
@@ -22,6 +22,10 @@ class Algorithm:
                 return self.selectionSort(arr)
             case "merge":
                 return self.mergeSort(arr)
+            case "heap":
+                return self.heapSort(arr)
+            case "radix":
+                return self.radixSort(arr)
     
     def bubbleSort(self, arr):
         # timeStart = time.time()
@@ -119,31 +123,54 @@ class Algorithm:
 
     def getTimeCounter(self):
         return self.timeCounter
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
 
-    def heapify(arr, n, i):
-        largest = i
-        l = 2 * i + 1
-        r = 2 * i + 2
-        
-        if l < n and arr[l] > arr[largest]:
-            largest = l
-        
-        if r < n and arr[r] > arr[largest]:
-            largest = r
-            
-        if largest != i:
-            arr[i], arr[largest] = arr[largest], arr[i]
-            heapify(arr, n, largest)
-            
-    def heapSort(arr):
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heapSort(arr):
+    n = len(arr)
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+        self.arraySteps.append(arr.copy)
+    return self.arraySteps
+
+def radixSort(arr):
+    maxNum = max(arr)
+    exp = 1
+    
+    while maxNum // exp > 0:
         n = len(arr)
+        output = [0] * n
+        count = [0] * 10
         
-        for i in range(n // 2, -1, -1, -1):
-            heapify(arr, n , i)
+        for num in arr:
+            index = (num // exp) % 10
+            count[index] += 1
+            
+        for i in range(1,10):
+            count[i] += count[i-1]
         
-        for i in range(n - 1, 0 , 1):
-           arr[i], arr[0] = arr[0], arr[i]
-           heapify(arr, i, 0) 
-           
-
+        for i in range(n - 1, -1, -1):
+            index = (arr[i]// exp) %10
+            output[count[index] - 1] = arr[i]
+            count[index] -= 1
+            
+        for i in range(n):
+            arr[i] = output[i]
+         
+        exp *= 10
+    
 Algorithm()
