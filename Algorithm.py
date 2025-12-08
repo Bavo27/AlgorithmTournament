@@ -166,8 +166,8 @@ class Algorithm:
             for i in range(n):
                 arr[i] = output[i]
             
+                self.arraySteps.append(arr.copy())
             exp *= 10
-            self.arraySteps.append(arr.copy())
         return self.arraySteps
     
     def getStepCounter(self):

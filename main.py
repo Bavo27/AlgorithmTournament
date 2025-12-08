@@ -117,7 +117,7 @@ class MainApp:
             if(self.i < len(self.arraySteps2)):
                 self.visualize2(self.arraySteps2[self.i], x+450)
             if self.i < maxLen:
-                self.root.after(1, animate)
+                self.root.after(5, animate)
                 self.i += 1
 
         animate()
