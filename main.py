@@ -84,7 +84,7 @@ class MainApp:
         self.menu.pack_forget()
         self.tournament.pack(fill="both", expand=True)
 
-        self.arr1 = list(range(1, 41))
+        self.arr1 = list(range(1, 101))
         random.shuffle(self.arr1)
 
         arrayText = "["+ str(self.arr1[0])
@@ -156,7 +156,7 @@ class MainApp:
                                         fill="black", outline="black", tag="alg2")
         endTime = time.time()
         self.time1 += endTime - startTime
-        self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1")
+        self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg2")
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(len(self.arraySteps2)), font=("Arial", 11), tag="alg2")
 
 if __name__ == "__main__":
