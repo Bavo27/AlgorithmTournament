@@ -123,7 +123,10 @@ class MainApp:
                 self.root.after(5, animate)
                 self.i += 1
 
-        animate()
+        if self.sort2 == True and self.sort1 == True:
+            self.endPage()
+        else:
+            animate()
     
     def visualize1(self, array, x):
         startTime = time.time()
@@ -138,11 +141,17 @@ class MainApp:
                                         (barwidth*(i+1))+xoffset,
                                         yoffset,
                                         fill="black", outline="black", tag="alg1")
+            
         endTime = time.time()
         self.time1 += endTime - startTime
+        
         self.alg1Steps += 1
+        
         self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(self.alg1Steps), font=("Arial", 11), tag="alg1", fill="black")
+        
+        if (array in self.arraySteps1):
+            self.sort1Status = True
             
     def visualize2(self, array, x):
         startTime = time.time()
@@ -157,16 +166,22 @@ class MainApp:
                                         (barwidth*(i+1))+xoffset,
                                         yoffset,
                                         fill="black", outline="black", tag="alg2")
+        
         endTime = time.time()
-        self.time2 = self.time2 + (endTime - startTime)*10
-        self.time2 = round(self.time2)
+        self.time2 += (endTime - startTime)*10
+        # self.time2 = round(self.time2)
+        
         self.alg2Steps += 1
+        
         self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time2), font=("Arial", 11), tag="alg2", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
+        
+        if (array in self.arraySteps2):
+            self.sort2Status = True
 
-    def finalResults(self):
-        print(self.sort1.getTimeCounter())
-        print(self.sort2.getTimeCounter())
+    def endPage(self):
+        print("END PAGE")
+        
         
 
 if __name__ == "__main__":

@@ -6,7 +6,6 @@ import time
 class Algorithm:
     def __init__(self):
         self.arraySteps = [[]]  # to store steps for visualization
-        self.stepCounter = 0
         self.timeCounter = 0
 
     def run(self, arr, algorithm):
@@ -35,7 +34,7 @@ class Algorithm:
                 if arr[j] > arr[j+1]:
                     arr[j], arr[j+1] = arr[j+1], arr[j]
                     self.arraySteps.append(arr.copy())
-                    self.stepCounter += 1
+            
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps # return the steps for visualization
@@ -49,7 +48,7 @@ class Algorithm:
                     arr[j] = arr[j+1]
                     arr[j+1] = curr
                     self.arraySteps.append(arr.copy())
-                    self.stepCounter += 1
+            
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
@@ -63,8 +62,8 @@ class Algorithm:
                 arr[j + 1] = arr[j]
                 j -= 1
                 self.arraySteps.append(arr.copy())
-                self.stepCounter += 1
             arr[j + 1] = key
+        
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
@@ -78,7 +77,7 @@ class Algorithm:
                     min_idx = j
             arr[i], arr[min_idx] = arr[min_idx], arr[i]
             self.arraySteps.append(arr.copy())
-            self.stepCounter += 1
+        
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
@@ -116,6 +115,7 @@ class Algorithm:
                 k += 1
             
             self.arraySteps.append(arr.copy())
+        
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
@@ -143,6 +143,7 @@ class Algorithm:
         for i in range(n - 1, 0, -1):
             arr[i], arr[0] = arr[0], arr[i]
             self.heapify(arr, i, 0)
+        
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
@@ -174,6 +175,7 @@ class Algorithm:
             
                 self.arraySteps.append(arr.copy())
             exp *= 10
+        
         endTime = time.time()
         self.timeCounter = endTime - startTime
         return self.arraySteps
