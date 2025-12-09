@@ -187,4 +187,6 @@ class MainApp:
         
 
 if __name__ == "__main__":
+    arr = [3,2,4,7,6,1,9]
+    print(arr)
     MainApp()

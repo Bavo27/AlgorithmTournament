@@ -182,6 +182,22 @@ class Algorithm:
         self.timeCounter = endTime - startTime
         return self.arraySteps
     
+    def bogoSort(arr):
+        while True:
+            sorted = True\
+                
+            for i in range(len(arr) - 1):
+                if arr[i] > arr[i + 1]:
+                    sorted = False
+                    break
+            
+            if sorted:
+                break
+            n = len(arr)
+            for i in range(n):
+                r = random.randint(0, n-1)
+                arr[i], arr[r] = arr[r], arr[i]
+    
     def getStepCounter(self):
         return self.stepCounter
 
