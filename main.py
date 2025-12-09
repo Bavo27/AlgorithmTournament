@@ -28,8 +28,8 @@ class MainApp:
         self.b5 = tk.Button(self.menu, text="Merge", command=lambda: self.selected(self.b5, "merge"))
         self.b6 = tk.Button(self.menu, text="Heap", command=lambda: self.selected(self.b6, "heap"))
         self.b7 = tk.Button(self.menu, text="Radix", command=lambda: self.selected(self.b7, "radix"))
-
-        for bttn in (self.b1, self.b2, self.b3, self.b4, self.b5, self.b6, self.b7):
+        self.b8 = tk.Button(self.menu, text="Bogo", command=lambda: self.selected(self.b8, "bogo"))
+        for bttn in (self.b1, self.b2, self.b3, self.b4, self.b5, self.b6, self.b7, self.b8):
             bttn.pack(pady=10)
             bttn.config(highlightbackground="SystemButtonFace")
 
@@ -187,6 +187,4 @@ class MainApp:
         
 
 if __name__ == "__main__":
-    arr = [3,2,4,7,6,1,9]
-    print(arr)
     MainApp()

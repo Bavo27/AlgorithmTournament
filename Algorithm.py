@@ -26,6 +26,8 @@ class Algorithm:
                 return self.heapSort(arr)
             case "radix":
                 return self.radixSort(arr)
+            case "bogo":
+                return self.bogoSort(arr)
     
     def bubbleSort(self, arr):
         startTime = time.time()
@@ -182,7 +184,7 @@ class Algorithm:
         self.timeCounter = endTime - startTime
         return self.arraySteps
     
-    def bogoSort(arr):
+    def bogoSort(self,arr):
         while True:
             sorted = True\
                 
@@ -197,6 +199,8 @@ class Algorithm:
             for i in range(n):
                 r = random.randint(0, n-1)
                 arr[i], arr[r] = arr[r], arr[i]
+                self.arraySteps.append(arr.copy())
+        return self.arraySteps
     
     def getStepCounter(self):
         return self.stepCounter
