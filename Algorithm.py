@@ -184,9 +184,13 @@ class Algorithm:
         self.timeCounter = endTime - startTime
         return self.arraySteps
     
-    def bogoSort(self,arr):
+    def bogoSort(self,arr, maxIters = 100):
+        iters = 0
         while True:
-            sorted = True\
+            iters += 1
+            if iters > maxIters:
+                break
+            sorted = True
                 
             for i in range(len(arr) - 1):
                 if arr[i] > arr[i + 1]:
