@@ -21,13 +21,14 @@ class MainApp:
 
         self.selectedBttns = []
         self.selectedAlgs = []
-        self.b1 = tk.Button(self.menu, text="Selection", command=lambda: self.selected(self.b1, "selection"))
-        self.b2 = tk.Button(self.menu, text="Insertion", command=lambda: self.selected(self.b2, "insertion"))
-        self.b3 = tk.Button(self.menu, text="Bubble", command=lambda: self.selected(self.b3, "bubble"))
-        self.b4 = tk.Button(self.menu, text="Bavo", command=lambda: self.selected(self.b4, "bavo"))
-        self.b6 = tk.Button(self.menu, text="Heap", command=lambda: self.selected(self.b6, "heap"))
-        self.b7 = tk.Button(self.menu, text="Radix", command=lambda: self.selected(self.b7, "radix"))
-        self.b8 = tk.Button(self.menu, text="Bogo", command=lambda: self.selected(self.b8, "bogo"))
+        self.selectedBigOs = []
+        self.b1 = tk.Button(self.menu, text="Selection", command=lambda: self.selected(self.b1, "selection", "O(n^2)"))
+        self.b2 = tk.Button(self.menu, text="Insertion", command=lambda: self.selected(self.b2, "insertion", "O(n^2)"))
+        self.b3 = tk.Button(self.menu, text="Bubble", command=lambda: self.selected(self.b3, "bubble", "O(n^2)"))
+        self.b4 = tk.Button(self.menu, text="Bavo", command=lambda: self.selected(self.b4, "bavo", "O(n+k)"))
+        self.b6 = tk.Button(self.menu, text="Heap", command=lambda: self.selected(self.b6, "heap", "O(nlogn)"))
+        self.b7 = tk.Button(self.menu, text="Radix", command=lambda: self.selected(self.b7, "radix", "O(nk)"))
+        self.b8 = tk.Button(self.menu, text="Bogo", command=lambda: self.selected(self.b8, "bogo", "O(n*n!)"))
         for bttn in (self.b1, self.b2, self.b3, self.b4, self.b6, self.b7, self.b8):
             bttn.pack(pady=10)
             bttn.config(highlightbackground="SystemButtonFace")
@@ -58,22 +59,26 @@ class MainApp:
         self.root.mainloop()
 
 
-    def selected(self, bttn, alg):
+    def selected(self, bttn, alg, oh):
         if(bttn in self.selectedBttns):
             self.selectedBttns.remove(bttn)
             self.selectedAlgs.remove(alg)
+            self.selectedBigOs.remove(oh)
             bttn.config(highlightbackground="SystemButtonFace")
         else:
             if(len(self.selectedBttns) >= 2):
                 self.selectedBttns[0].config(highlightbackground="SystemButtonFace")
                 self.selectedBttns[0] = self.selectedBttns[1]
                 self.selectedAlgs[0] = self.selectedAlgs[1]
+                self.selectedBigOs[0] = self.selectedBigOs[1]
                 self.selectedBttns[1] = bttn
                 self.selectedAlgs[1] = alg
+                self.selectedBigOs[1] = oh
                 bttn.config(highlightbackground="lightgreen")
             else:
                 self.selectedBttns.append(bttn)
                 self.selectedAlgs.append(alg)
+                self.selectedBigOs.append(oh)
                 bttn.config(highlightbackground="lightgreen")
         
     def mainMenu(self):
@@ -81,6 +86,8 @@ class MainApp:
         self.menu.pack(fill="both", expand=True)
 
     def startTournament(self):
+        if(len(self.selectedAlgs) < 2):
+            return
         self.menu.pack_forget()
         self.tournament.pack(fill="both", expand=True)
 
@@ -148,7 +155,8 @@ class MainApp:
         
         #self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(self.alg1Steps), font=("Arial", 11), tag="alg1", fill="black")
-        self.canvas.create_text(x+100, 35, text= self.selectedAlgs[0] + " sort", font=("Arial", 11), tag="alg1", fill="black")
+        t = self.selectedAlgs[0].capitalize() + " sort: " + self.selectedBigOs[0]
+        self.canvas.create_text(x+100, 35, text = t, font=("Arial", 11), tag="alg1", fill="black")
 
         if (array in self.arraySteps1):
             self.sort1Status = True
@@ -175,7 +183,8 @@ class MainApp:
         
         #self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time2), font=("Arial", 11), tag="alg2", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
-        self.canvas.create_text(x+100, 35, text= self.selectedAlgs[1] + " sort", font=("Arial", 11), tag="alg2", fill="black")
+        t = self.selectedAlgs[1].capitalize() + " sort: " + self.selectedBigOs[1]
+        self.canvas.create_text(x+100, 35, text = t, font=("Arial", 11), tag="alg2", fill="black")
 
         if (array in self.arraySteps2):
             self.sort2Status = True
