@@ -28,6 +28,7 @@ class Algorithm:
                 return self.radixSort(arr)
     
     def bubbleSort(self, arr):
+        startTime = time.time()
         n = len(arr)
         for i in range(n):
             for j in range(0, n-i-1):
@@ -35,10 +36,12 @@ class Algorithm:
                     arr[j], arr[j+1] = arr[j+1], arr[j]
                     self.arraySteps.append(arr.copy())
                     self.stepCounter += 1
-    
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps # return the steps for visualization
 
     def bavoSort(self, arr):
+        startTime = time.time()
         for i in range(len(arr)):
             for j in range(i - 1, -1, -1):
                 curr = arr[j]
@@ -47,10 +50,12 @@ class Algorithm:
                     arr[j+1] = curr
                     self.arraySteps.append(arr.copy())
                     self.stepCounter += 1
-
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
     
     def insertionSort(self, arr):
+        startTime = time.time()
         for i in range(1, len(arr)):
             key = arr[i]
             j = i - 1
@@ -60,9 +65,12 @@ class Algorithm:
                 self.arraySteps.append(arr.copy())
                 self.stepCounter += 1
             arr[j + 1] = key
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
 
     def selectionSort(self, arr):
+        startTime = time.time()
         for i in range(len(arr)):
             min_idx = i
             for j in range(i+1, len(arr)):
@@ -71,10 +79,12 @@ class Algorithm:
             arr[i], arr[min_idx] = arr[min_idx], arr[i]
             self.arraySteps.append(arr.copy())
             self.stepCounter += 1
-
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
     
     def mergeSort(self, arr):
+        startTime = time.time()
         if len(arr) > 1:
             mid = len(arr) // 2
             
@@ -106,6 +116,8 @@ class Algorithm:
                 k += 1
             
             self.arraySteps.append(arr.copy())
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
     
     def heapify(self, arr, n, i):
@@ -124,15 +136,19 @@ class Algorithm:
         self.arraySteps.append(arr.copy())
 
     def heapSort(self, arr):
+        startTime = time.time()
         n = len(arr)
         for i in range(n // 2 - 1, -1, -1):
             self.heapify(arr, n, i)
         for i in range(n - 1, 0, -1):
             arr[i], arr[0] = arr[0], arr[i]
             self.heapify(arr, i, 0)
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
 
     def radixSort(self, arr):
+        startTime = time.time()
         maxNum = max(arr)
         exp = 1
         
@@ -158,6 +174,8 @@ class Algorithm:
             
                 self.arraySteps.append(arr.copy())
             exp *= 10
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
         return self.arraySteps
     
     def getStepCounter(self):

@@ -53,6 +53,9 @@ class MainApp:
         self.time1 = 0
         self.time2 = 0
         
+        self.sort1Status = False
+        self.sort2Status = False
+
         self.root.mainloop()
 
 
@@ -100,12 +103,12 @@ class MainApp:
         self.alg1Steps = 0
         self.alg2Steps = 0
 
-        sort1 = Algorithm.Algorithm()
-        self.arraySteps1 = sort1.run(self.arr1.copy(), self.selectedAlgs[0])
-        sort2 = Algorithm.Algorithm() #so that the sort counter and timer doesn't cross
-        self.arraySteps2 = sort2.run(self.arr1.copy(), self.selectedAlgs[1])
-        self.time1 = sort1.getTimeCounter()
-        self.time2 = sort2.getTimeCounter()
+        self.sort1 = Algorithm.Algorithm()
+        self.arraySteps1 = self.sort1.run(self.arr1.copy(), self.selectedAlgs[0])
+        self.sort2 = Algorithm.Algorithm() #so that the sort counter and timer doesn't cross
+        self.arraySteps2 = self.sort2.run(self.arr1.copy(), self.selectedAlgs[1])
+        self.time1 = self.sort1.getTimeCounter()
+        self.time2 = self.sort2.getTimeCounter()
         self.visualizeSort(20)
         
 
@@ -160,6 +163,11 @@ class MainApp:
         self.alg2Steps += 1
         self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time2), font=("Arial", 11), tag="alg2", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
+
+    def finalResults(self):
+        print(self.sort1.getTimeCounter())
+        print(self.sort2.getTimeCounter())
+        
 
 if __name__ == "__main__":
     MainApp()
