@@ -149,7 +149,8 @@ class MainApp:
         
         #self.canvas.create_text(x+100, 50, text="Algorithm 1 time: " + "{:.5f}".format(self.time1), font=("Arial", 11), tag="alg1", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(self.alg1Steps), font=("Arial", 11), tag="alg1", fill="black")
-        
+        self.canvas.create_text(x+100, 35, text= self.selectedAlgs[0] + " sort", font=("Arial", 11), tag="alg1", fill="black")
+
         if (array in self.arraySteps1):
             self.sort1Status = True
             
@@ -175,7 +176,8 @@ class MainApp:
         
         #self.canvas.create_text(x+100, 50, text="Algorithm 2 time: " + "{:.5f}".format(self.time2), font=("Arial", 11), tag="alg2", fill="black")
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
-        
+        self.canvas.create_text(x+100, 35, text= self.selectedAlgs[1] + " sort", font=("Arial", 11), tag="alg2", fill="black")
+
         if (array in self.arraySteps2):
             self.sort2Status = True
 

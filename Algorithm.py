@@ -20,7 +20,8 @@ class Algorithm:
             case "selection":
                 return self.selectionSort(arr)
             case "merge":
-                return self.mergeSort(arr)
+                self.mergeSort(arr)
+                return self.arraySteps
             case "heap":
                 return self.heapSort(arr)
             case "radix":
@@ -82,43 +83,44 @@ class Algorithm:
         self.timeCounter = endTime - startTime
         return self.arraySteps
     
-    def mergeSort(self, arr):
-        startTime = time.time()
-        if len(arr) > 1:
-            mid = len(arr) // 2
+    # def mergeSort(self, arr):
+    #     startTime = time.time()
+    #     if len(arr) > 1:
+    #         mid = len(arr) // 2
             
-            L = arr[:mid]
-            R = arr[mid:]
+    #         L = arr[:mid]
+    #         R = arr[mid:]
 
-            self.mergeSort(L)
-            self.mergeSort(R)
+    #         self.mergeSort(L)
+    #         self.mergeSort(R)
 
-            i = j = k = 0
+    #         i = j = k = 0
 
-            while i < len(L) and j < len(R):
-                if L[i] < R[j]:
-                    arr[k] = L[i]
-                    i += 1
-                else:
-                    arr[k] = R[j]
-                    j += 1
-                k += 1
+    #         while i < len(L) and j < len(R):
+    #             if L[i] < R[j]:
+    #                 arr[k] = L[i]
+    #                 i += 1
+    #                 self.arraySteps.append(arr.copy())
+    #             else:
+    #                 arr[k] = R[j]
+    #                 j += 1
+    #                 self.arraySteps.append(arr.copy())
+    #             k += 1
                 
-            while i < len(L):
-                arr[k] = L[i]
-                i += 1
-                k += 1
+    #         while i < len(L):
+    #             arr[k] = L[i]
+    #             i += 1
+    #             k += 1
+    #             self.arraySteps.append(arr.copy())
 
-            while j < len(R):
-                arr[k] = R[j]
-                j += 1
-                k += 1
-            
-            self.arraySteps.append(arr.copy())
+    #         while j < len(R):
+    #             arr[k] = R[j]
+    #             j += 1
+    #             k += 1
+    #             self.arraySteps.append(arr.copy())
         
-        endTime = time.time()
-        self.timeCounter = endTime - startTime
-        return self.arraySteps
+    #     endTime = time.time()
+    #     self.timeCounter = endTime - startTime
     
     def heapify(self, arr, n, i):
         largest = i
