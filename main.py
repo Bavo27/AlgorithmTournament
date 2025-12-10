@@ -80,6 +80,7 @@ class MainApp:
     def mainMenu(self):
         self.tournament.pack_forget()
         self.menu.pack(fill="both", expand=True)
+        self.canvas.delete("end")
 
     def startTournament(self):
         self.menu.pack_forget()
@@ -120,13 +121,13 @@ class MainApp:
             if(self.i < len(self.arraySteps2)):
                 self.visualize2(self.arraySteps2[self.i], x+450)
             if self.i < maxLen:
-                self.root.after(5, animate)
+                self.root.after(1, animate)
                 self.i += 1
+            else:
+                self.endPage()
+                
 
-        if self.sort2 == True and self.sort1 == True:
-            self.endPage()
-        else:
-            animate()
+        animate()
     
     def visualize1(self, array, x):
         startTime = time.time()
@@ -151,8 +152,6 @@ class MainApp:
         self.canvas.create_text(x+100, 70, text="Algorithm 1 steps: " + str(self.alg1Steps), font=("Arial", 11), tag="alg1", fill="black")
         self.canvas.create_text(x+100, 35, text= self.selectedAlgs[0] + " sort", font=("Arial", 11), tag="alg1", fill="black")
 
-        if (array in self.arraySteps1):
-            self.sort1Status = True
             
     def visualize2(self, array, x):
         startTime = time.time()
@@ -178,11 +177,12 @@ class MainApp:
         self.canvas.create_text(x+100, 70, text="Algorithm 2 steps: " + str(self.alg2Steps), font=("Arial", 11), tag="alg2", fill="black")
         self.canvas.create_text(x+100, 35, text= self.selectedAlgs[1] + " sort", font=("Arial", 11), tag="alg2", fill="black")
 
-        if (array in self.arraySteps2):
-            self.sort2Status = True
 
     def endPage(self):
-        print("END PAGE")
+        self.canvas.create_text(150, 100, text= self.selectedAlgs[0] + " finished in " + str(self.sort1.getTimeCounter()), font=("Arial", 11), tag="end", fill="black")
+        self.canvas.create_text(550, 100, text= self.selectedAlgs[1] + " finished in " + str(self.sort2.getTimeCounter()), font=("Arial", 11), tag="end", fill="black")
+
+        
         
         
 

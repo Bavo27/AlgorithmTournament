@@ -6,10 +6,11 @@ import time
 class Algorithm:
     def __init__(self):
         self.arraySteps = [[]]  # to store steps for visualization
+        self.mergeSteps = []
         self.timeCounter = 0
 
     def run(self, arr, algorithm):
-        self.arraySteps = [[]]
+        startTime = time.time()
         match algorithm:
             case "bubble":
                 return self.bubbleSort(arr)
@@ -21,13 +22,16 @@ class Algorithm:
                 return self.selectionSort(arr)
             case "merge":
                 self.mergeSort(arr)
-                return self.arraySteps
+                result = self.arraySteps
             case "heap":
                 return self.heapSort(arr)
             case "radix":
                 return self.radixSort(arr)
             case "bogo":
                 return self.bogoSort(arr)
+        endTime = time.time()
+        self.timeCounter = endTime - startTime
+        return result
     
     def bubbleSort(self, arr):
         startTime = time.time()
@@ -85,44 +89,50 @@ class Algorithm:
         self.timeCounter = endTime - startTime
         return self.arraySteps
     
-    # def mergeSort(self, arr):
-    #     startTime = time.time()
-    #     if len(arr) > 1:
-    #         mid = len(arr) // 2
-            
-    #         L = arr[:mid]
-    #         R = arr[mid:]
 
-    #         self.mergeSort(L)
-    #         self.mergeSort(R)
+    def mergeSort(self, arr, left=0, right=None):
+        if right is None:
+            right = len(arr) - 1
 
-    #         i = j = k = 0
+        if left < right:
+            mid = (left + right) // 2
 
-    #         while i < len(L) and j < len(R):
-    #             if L[i] < R[j]:
-    #                 arr[k] = L[i]
-    #                 i += 1
-    #                 self.arraySteps.append(arr.copy())
-    #             else:
-    #                 arr[k] = R[j]
-    #                 j += 1
-    #                 self.arraySteps.append(arr.copy())
-    #             k += 1
-                
-    #         while i < len(L):
-    #             arr[k] = L[i]
-    #             i += 1
-    #             k += 1
-    #             self.arraySteps.append(arr.copy())
+            self.mergeSort(arr, left, mid)
+            self.mergeSort(arr, mid + 1, right)
 
-    #         while j < len(R):
-    #             arr[k] = R[j]
-    #             j += 1
-    #             k += 1
-    #             self.arraySteps.append(arr.copy())
-        
-    #     endTime = time.time()
-    #     self.timeCounter = endTime - startTime
+            self.merge(arr, left, mid, right)
+    
+    def merge(self, arr, left, mid, right):
+        L = arr[left:mid + 1]
+        R = arr[mid + 1:right + 1]
+
+        i = j = 0
+        k = left
+
+        while i < len(L) and j < len(R):
+            if L[i] <= R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+            # Append full snapshot of the array
+            self.arraySteps.append(arr.copy())
+
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+            self.arraySteps.append(arr.copy())
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+            self.arraySteps.append(arr.copy())  
+    
     
     def heapify(self, arr, n, i):
         largest = i
