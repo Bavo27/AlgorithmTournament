@@ -6,10 +6,10 @@ import time
 class Algorithm:
     def __init__(self):
         self.arraySteps = [[]]  # to store steps for visualization
-        self.mergeSteps = []
         self.timeCounter = 0
 
     def run(self, arr, algorithm):
+        result = []
         startTime = time.time()
         match algorithm:
             case "bubble":
@@ -117,8 +117,6 @@ class Algorithm:
                 arr[k] = R[j]
                 j += 1
             k += 1
-
-            # Append full snapshot of the array
             self.arraySteps.append(arr.copy())
 
         while i < len(L):

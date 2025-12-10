@@ -26,10 +26,11 @@ class MainApp:
         self.b2 = tk.Button(self.menu, text="Insertion", command=lambda: self.selected(self.b2, "insertion", "O(n^2)"))
         self.b3 = tk.Button(self.menu, text="Bubble", command=lambda: self.selected(self.b3, "bubble", "O(n^2)"))
         self.b4 = tk.Button(self.menu, text="Bavo", command=lambda: self.selected(self.b4, "bavo", "O(n+k)"))
+        self.b5 = tk.Button(self.menu, text="Merge", command=lambda: self.selected(self.b5, "merge", "O(nlogn)"))
         self.b6 = tk.Button(self.menu, text="Heap", command=lambda: self.selected(self.b6, "heap", "O(nlogn)"))
         self.b7 = tk.Button(self.menu, text="Radix", command=lambda: self.selected(self.b7, "radix", "O(nk)"))
         self.b8 = tk.Button(self.menu, text="Bogo", command=lambda: self.selected(self.b8, "bogo", "O(n*n!)"))
-        for bttn in (self.b1, self.b2, self.b3, self.b4, self.b6, self.b7, self.b8):
+        for bttn in (self.b1, self.b2, self.b3, self.b4, self.b5, self.b6, self.b7, self.b8):
             bttn.pack(pady=10)
             bttn.config(highlightbackground="SystemButtonFace")
 
