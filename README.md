@@ -1,1 +1,4 @@
 # AlgorithmTournament
+Running the project: You need to run the main.py file. Running Algorithm.py won't do anything.
+
+Project description: We wanted initially to have a sorting algorithm tournament with each algorithm showing the amount of time it takes to sort and the amount of steps, however we pivoted to just have two algorithms. To complete this we worked with TKinter to visualize the graphs as each value in the array would have a different lengths which corresponds to how large or small the value is. We also made an Algorithm object, which had time and steps and then you could call any one of the algorithms written in there.
